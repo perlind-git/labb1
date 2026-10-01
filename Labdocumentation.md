@@ -48,7 +48,7 @@ vboxuser@Ubuntu:/var/systementor/konsultdata$
 
 >vboxuser@Ubuntu:/var/systementor/konsultdata$ ping 192.168.1.50
 
-PING 192.168.1.50 (192.168.1.50) 56(84) bytes of data.
+>PING 192.168.1.50 (192.168.1.50) 56(84) bytes of data.
 ^C      
 --- 192.168.1.50 ping statistics ---
 388 packets transmitted, 0 received, 100% packet loss
@@ -59,7 +59,7 @@ Run `Set-NetFirewallRule -Name CoreNet-Diag-ICMP4-EchoRequest-In -enabled True` 
 **Try ping again**
 >vboxuser@Ubuntu:/var/systementor/konsultdata$ ping 192.168.1.50
 
-PING 192.168.1.50 (192.168.1.50) 56(84) bytes of data.
+>PING 192.168.1.50 (192.168.1.50) 56(84) bytes of data.
 64 bytes from 192.168.1.50: icmp_seq=1 ttl=128 time=3.31 ms
 64 bytes from 192.168.1.50: icmp_seq=2 ttl=128 time=2.08 ms
 64 bytes from 192.168.1.50: icmp_seq=3 ttl=128 time=2.00 ms

@@ -402,3 +402,9 @@ PS C:\Systementor\konsultdata>
 ```
 
 I also asked chatgpt the same question about the cacls command [cacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cacls) (which is depreceated) and chatgpt reported this correctly as depreceated but still gave me a full explanation as it can still exist in older applications such as scripts etc.
+
+
+
+# Gitlog
+
+![git log --oneline](gitlog.jpg)

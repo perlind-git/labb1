@@ -199,7 +199,7 @@ I asked chatgpt [chatgpt](https://chatgpt.com/) to explain the windows icacls co
 ```
 explain icacls usage
 ```
-Chatgpt enerated the following response
+Chatgpt generated the following response
 
 ```
 icacls command in Windows
@@ -370,5 +370,35 @@ For experimenting, it's best to practice icacls on a test folder, because incorr
 I used the official documentation from microsofts site [icacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls) and I could not find any faults in the description or the examples.
 The warnings that chatgpt are correctly reported and are valid.
 
-I also asked chatgpt the same question about the cacls command [cacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cacls) (which is depreceated) and chatgpt reported this correctly but still gave me a full explanation as it can still exist in older applications such as scripts etc.
-I verified some examples that chatgpt gave and verified that the results are as expected. 
+I verified some examples that chatgpt gave and verified that the results are as expected.
+
+```
+S C:\Systementor\konsultdata> get-acl .\report.txt
+
+
+    Directory: C:\Systementor\konsultdata
+
+
+Path       Owner     Access
+----       -----     ------
+report.txt WIN11\per BUILTIN\Administrators Allow  FullControl...
+
+
+PS C:\Systementor\konsultdata> icacls report.txt /grant John:F
+processed file: report.txt
+Successfully processed 1 files; Failed processing 0 files
+PS C:\Systementor\konsultdata> get-acl .\report.txt
+
+
+    Directory: C:\Systementor\konsultdata
+
+
+Path       Owner     Access
+----       -----     ------
+report.txt WIN11\per WIN11\John Allow  FullControl...
+
+
+PS C:\Systementor\konsultdata>
+```
+
+I also asked chatgpt the same question about the cacls command [cacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cacls) (which is depreceated) and chatgpt reported this correctly as depreceated but still gave me a full explanation as it can still exist in older applications such as scripts etc.

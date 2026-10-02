@@ -128,7 +128,8 @@ PS C:\WINDOWS\system32>
 
 **Get ACL**
 
-```PS C:\WINDOWS\system32> get-acl c:\Systementor\konsultdata
+```
+PS C:\WINDOWS\system32> get-acl c:\Systementor\konsultdata
 
 
     Directory: C:\Systementor
@@ -190,3 +191,184 @@ Ethernet adapter Ethernet:
    NetBIOS over Tcpip. . . . . . . . : Enabled
 PS C:\WINDOWS\system32>
 ```
+
+# AI-log and evaluation:
+
+I asked chatgpt [chatgpt](https://chatgpt.com/) to explain the windows icacls command
+
+```
+explain icacls usage
+```
+Chatgpt enerated the following response
+
+```
+icacls command in Windows
+
+icacls is a Windows Command Prompt command used to view and modify file and folder permissions. It is especially useful for managing NTFS permissions.
+Basic syntax
+
+icacls <file-or-folder> [options]
+
+1. View permissions
+
+To see the permissions of a file:
+
+icacls report.txt
+
+Example output:
+
+report.txt BUILTIN\Administrators:(I)(F)
+            NT AUTHORITY\SYSTEM:(I)(F)
+            John:(I)(M)
+
+Common permission codes:
+Code	Meaning
+F	Full control
+M	Modify
+RX	Read and execute
+R	Read
+W	Write
+D	Delete
+
+(I) means the permission is inherited from the parent folder.
+2. Grant permission
+
+For example, give user John read and execute permission:
+
+icacls report.txt /grant John:RX
+
+Give John full control:
+
+icacls report.txt /grant John:F
+
+Common /grant permissions
+
+/g user:R
+/g user:W
+/g user:RX
+/g user:M
+/g user:F
+
+/g is a shorter form of /grant.
+3. Remove a user's permission
+
+icacls report.txt /remove John
+
+This removes the explicitly assigned permission for John.
+4. Deny permission
+
+You can explicitly deny access:
+
+icacls report.txt /deny John:W
+
+This denies John write permission.
+
+Be careful with /deny, because explicit deny permissions can override otherwise allowed permissions and make troubleshooting more difficult.
+5. Apply permissions to a folder and its contents
+
+Suppose you have:
+
+C:\Projects
+
+To grant John read/execute access to the folder and its files/subfolders:
+
+icacls C:\Projects /grant John:RX /T
+
+/T means process all matching files and subdirectories.
+6. Inheritance
+
+NTFS permissions can be inherited from a parent folder.
+Disable inheritance
+
+icacls C:\Projects /inheritance:d
+
+d means disable inheritance but copy the inherited permissions as explicit permissions.
+
+Another option:
+
+icacls C:\Projects /inheritance:r
+
+r removes inherited permissions.
+Enable inheritance again
+
+icacls C:\Projects /inheritance:e
+
+e enables inheritance.
+7. Copy permissions
+
+You can copy an ACL from one file to another:
+
+icacls file1.txt /save permissions.txt
+
+Then restore those permissions elsewhere:
+
+icacls file2.txt /restore permissions.txt
+
+This is useful when you need to back up or reproduce permissions.
+8. Reset permissions
+
+A very useful command is:
+
+icacls C:\Projects /reset /T
+
+This resets permissions to the default inherited permissions for the files and folders.
+
+Be careful: this changes existing permissions, so don't use /reset on important data without understanding the consequences.
+Example scenario
+
+Imagine:
+
+C:\Company
+├── Public
+└── Private
+
+You want John to read the Public folder:
+
+icacls C:\Company\Public /grant John:RX /T
+
+You want John to modify files in Private:
+
+icacls C:\Company\Private /grant John:M /T
+
+You can then verify the result:
+
+icacls C:\Company\Private
+
+Useful commands to remember
+
+icacls file.txt
+
+View permissions
+
+icacls file.txt /grant John:R
+
+Grant read permission
+
+icacls file.txt /grant John:M
+
+Grant modify permission
+
+icacls file.txt /remove John
+
+Remove John's explicit permission
+
+icacls folder /grant John:RX /T
+
+Grant permission recursively
+
+icacls folder /inheritance:e
+
+Enable inheritance
+
+icacls folder /reset /T
+
+Reset permissions recursively
+
+For experimenting, it's best to practice icacls on a test folder, because incorrect ACL changes can prevent users—including yourself—from accessing files.
+```
+
+I used the official documentation from microsofts site [icacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls) and I could not find any faults in the description or the examples.
+The warnings that chatgpt are correctly reported and are valid.
+
+I also asked chatgpt the same question about the cacls command [cacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cacls) (which is depreceated) and chatgpt reported this correctly but still gave me a full explanation as it can still exist in older applications such as scripts etc.
+I verified some examples that chatgpt gave and verified that the results are as expected. 

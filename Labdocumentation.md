@@ -105,3 +105,88 @@ vboxuser@Ubuntu:/var/systementor/konsultdata$ ip addr show
 vboxuser@Ubuntu:/var/systementor/konsultdata$
 ```
 
+**Windows**
+
+Open powershell as admin
+
+**Create directory c:\sytementor\konsultdata**
+
+```
+PS C:\WINDOWS\system32> mkdir c:\Systementor\konsultdata
+
+
+    Directory: C:\Systementor
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10/2/2026   1:56 AM                konsultdata
+
+
+PS C:\WINDOWS\system32>
+```
+
+**Get ACL**
+
+```PS C:\WINDOWS\system32> get-acl c:\Systementor\konsultdata
+
+
+    Directory: C:\Systementor
+
+
+Path        Owner                  Access
+----        -----                  ------
+konsultdata BUILTIN\Administrators BUILTIN\Administrators Allow  FullControl...
+
+
+PS C:\WINDOWS\system32>
+```
+
+**Verify network connectivity to Ubuntu (192.168.1.51)**
+
+```
+PS C:\WINDOWS\system32> ping 192.168.1.51
+
+Pinging 192.168.1.51 with 32 bytes of data:
+Reply from 192.168.1.51: bytes=32 time=2ms TTL=64
+Reply from 192.168.1.51: bytes=32 time=1ms TTL=64
+Reply from 192.168.1.51: bytes=32 time=2ms TTL=64
+Reply from 192.168.1.51: bytes=32 time=1ms TTL=64
+
+Ping statistics for 192.168.1.51:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms
+PS C:\WINDOWS\system32>
+```
+
+**Display Network configuration**
+
+```
+PS C:\WINDOWS\system32> ipconfig /all
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : Win11
+   Primary Dns Suffix  . . . . . . . :
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . :
+   Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Desktop Adapter
+   Physical Address. . . . . . . . . : 08-00-27-C1-14-36
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::dc8a:ba1d:7871:99fb%5(Preferred)
+   IPv4 Address. . . . . . . . . . . : 192.168.1.50(Preferred)
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.1.1
+   DHCPv6 IAID . . . . . . . . . . . : 84410407
+   DHCPv6 Client DUID. . . . . . . . : 00-01-01-00-32-2A-13-74-08-00-27-C1-14-36
+   DNS Servers . . . . . . . . . . . : 8.8.8.8
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+PS C:\WINDOWS\system32>
+```
